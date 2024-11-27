@@ -10,7 +10,7 @@
   #show: poster.with(
     size: "24x36",
     title: "Human-aided Discovery" + linebreak(justify: false) + "of Ancestral Graphs",
-    authors: "Tiago da Silva, Eliezer da Silva, Antonio Góis," +  linebreak(justify: false) +  "Samuel Kaski, Dominik Heider, Diego Mesquita, Adéle Ribeiro",
+    authors: "Tiago da Silva, Eliezer da Silva, Antonio Góis," +  linebreak(justify: false) +  "Samuel Kaski, Dominik Heider, Diego Mesquita, Adèle Ribeiro",
     footer_email_ids: [], 
     departments: none,
     univ_logo: ("../logos/aalto.png", "../logos/marburg.png", "../logos/fgv.png", "../logos/mila.png"),

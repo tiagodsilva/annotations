@@ -9,21 +9,21 @@
 
   #show: poster.with(
     size: "48x36",
-    title: "Embarrassingly Parallel GFlowNets",
-    authors: "Tiago da Silva, Luiz Carvalho, Amauri Souza, Samuel Kaski, Diego Mesquita",
+    title: "On Divergence Measures for Training GFlowNets",
+    authors: "Tiago da Silva, Eliezer da Silva, Diego Mesquita",
     departments: none,
-    univ_logo: ("../logos/fgv.png", "../logos/aalto.svg", "../logos/ifce.png", "../logos/manchester.png"),
-    footer_text: "International Conference of Machine Learning 2024",
-    footer_url: "https://github.com/ML-FGV/ep-gflownets",
-    footer_email_ids: "{tiago.henrique, luiz.carvalho, diego.mesquita}@fgv.br, {amauri.souza, sami.kaski}@aalto.fi",
+    univ_logo: ("../logos/fgv.png",),
+    footer_text: "Conference on Advances in Neural Information Processing 2024",
+    footer_url: "https://github.com/ML-FGV/divergences-gflownets",
+    footer_email_ids: "{tiago.henrique, eliezer.silva, diego.mesquita}@fgv.br",
     footer_color: "ebcfb2", 
-    univ_logo_column_size: (5.8in, 3in, 4in, 5.8in),
-    univ_logo_column_gutter: (-.1in, -.1in, -.5in, -.1in, -.1in), 
-    title_column_size: "26", 
+    univ_logo_column_size: (8in,),
+    univ_logo_column_gutter: (3in,), 
+    title_column_size: "32", 
     title_font_size: "88", 
     authors_font_size: "46", 
     // Modifying the defaults
-    keywords: ("GFlowNets", "Distributed Bayesian inference"),
+    keywords: ("GFlowNets", "Variational Bayesian inference"),
   )
 
   #set text(size: 22pt) 
