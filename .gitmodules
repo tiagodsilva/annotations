@@ -1,0 +1,3 @@
+[submodule "typst-poster"]
+	path = posters/typst-poster
+	url = https://github.com/tiagodsilva/typst-poster
