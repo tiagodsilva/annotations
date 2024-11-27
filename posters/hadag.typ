@@ -8,22 +8,25 @@
   #let pb = text(fill: forestgreen)[$p_B (tau|x)$]
 
   #show: poster.with(
-    size: "48x36",
-    title: "Embarrassingly Parallel GFlowNets",
-    authors: "Tiago da Silva, Luiz Carvalho, Amauri Souza, Samuel Kaski, Diego Mesquita",
+    size: "24x36",
+    title: "Human-aided Discovery of Ancestral Graphs",
+    authors: "Tiago da Silva, Eliezer da Silva, Samuel Kaski," +  linebreak(justify: false) +  "Dominik Heider, Diego Mesquita, Adèle Helena Ribeiro",
     departments: none,
-    univ_logo: ("../logos/fgv.png", "../logos/aalto.svg", "../logos/ifce.png", "../logos/manchester.png"),
-    footer_text: "International Conference of Machine Learning 2024",
+    univ_logo: ("../logos/aalto.png", "../logos/marburg.png", "../logos/fgv.png", "../logos/mila.png"),
+    footer_text: "LatinX @ NeurIPS 2024",
     footer_url: "https://github.com/ML-FGV/agfn",
-    footer_email_ids: "{tiago.henrique, luiz.carvalho, diego.mesquita}@fgv.br, {amauri.souza, sami.kaski}@aalto.fi",
     footer_color: "ebcfb2", 
-    univ_logo_column_size: (5.8in, 3in, 4in, 5.8in),
-    univ_logo_column_gutter: (-.1in, -.1in, -.5in, -.1in, -.1in), 
-    title_column_size: "26", 
-    title_font_size: "88", 
-    authors_font_size: "46", 
+    univ_logo_column_size: (5in, 5in), 
+    univ_logo_column_gutter: (-3.5in, -.25in, -.25in, -.05in, -.05in), 
+    univ_logo_grid_row_size: (1.8in, 2in),  
+    univ_logo_grid_col_size: (3.6in, 3.6in), 
+    univ_logo_scale: (50%, 50%, 110%, 110%), 
+    title_column_size: "16", 
+    title_font_size: "64", 
+    authors_font_size: "32", 
+    num_columns: "2", 
     // Modifying the defaults
-    keywords: ("Causal Discovery", "Human in the loop"),
+    keywords: ("Causal Discovery", "Human in the loop", "Probabilistic inference"), 
   )
 
   #set text(size: 22pt) 
