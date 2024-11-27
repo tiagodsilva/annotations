@@ -176,7 +176,7 @@
     inset: 12pt, 
     [
       #text(fill: darkblue)[
-        We probe the expert on the relation $cal(R)$ minimizing the cross-entropy between distributions $p(dot.c | cal(F) union  {cal(R)})$ and $p(dot.c | cal(G))$.    
+        We probe the expert on the relation $cal(R)$ minimizing the cross-entropy between distributions $p(dot.c | cal(F) union  {cal(R)})$ and $p(dot.c | cal(F))$.    
       ]
     ]
   )
