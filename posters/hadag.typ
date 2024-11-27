@@ -60,10 +60,11 @@
   #align(
     center, 
     grid(
-      rows: (1.8in, .15in), columns: 2,  
-      align(left, image("figures/iv.svg")),   
+      rows: (1.8in, .15in), columns: 3,  
+      align(horizon, image("figures/chain4.svg")), 
       align(right, image("figures/collfork.svg")), 
-      grid.cell(colspan: 2, align(center, text(size: 18pt)[Examples of ancestral graphs.]))  
+      align(left, image("figures/iv.svg")),   
+      grid.cell(colspan: 3, align(center, text(size: 18pt)[Examples of ancestral graphs.]))  
       )
   )
 
