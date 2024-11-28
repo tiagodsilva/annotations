@@ -82,6 +82,7 @@
           $
             pi(G | bold(X)) prop exp(s(bold(X), G) ).  
           $
+	  Alas, exact Bayesian inference on $pi$ is not possible. Instead, we use a GFlowNet to tractably approximate $pi$.
         ]
       ]
     )
@@ -93,7 +94,7 @@
   compositional space $cal(G)$. 
 
   #figure(
-    image("figures/tb.svg", width: 45%)
+    image("figures/tb.svg", width: 39%)
   ) <gfn> 
 
   We construct a *state graph* on the extended space ${s_o} union cal(S) union cal(G)$ 
@@ -158,7 +159,7 @@
   $
     q(V hat(cal(R)) W | cal(R)) = pi dot.c 1_(V hat(cal(R)) W = V cal(R) W) + ( (1 - pi) / 3 ) dot.c 1_(V hat(cal(R)) W != V cal(R) W)
   $
-  in which $cal(R) in {arrow.r, arrow.l, arrow.l.r, emptyset}$ ($hat(cal(R))$) is the expert-provided (estimated) relationship between $V$ and $W$; $pi$ is an hyperparameter. 
+  in which $cal(R) in {arrow.r, arrow.l, arrow.l.r, emptyset}$ ($hat(cal(R))$) is the expert-provided (estimated) relationship between $V$ and $W$; $pi$ is an hyperparameter.
 
   2. A *scheme for integrating the expert's knowledge* into AGFN's learned model. Given feedbacks $cal(F) = {V_i cal(R)_i W_i}_(i=1)^(n)$, 
   $
