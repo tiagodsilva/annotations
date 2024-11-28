@@ -35,10 +35,11 @@
     [
       #text(fill: white)[
       *TL;DR*     
-      - we introduce the *contrastive balance condition (CBC)* as a provably sufficient and minimally parameterized criterion for sampling correctness in GFlowNets,    
-      - we develop the *first general-purpose algorithm*, called *Embarrassingly Parallel GFlowNets* (EP-GFlowNets), enabling minimum-communication parallel and federated inference for probabilistic models with compositional and finite supports,  
-      - we show that EP-GFlowNets can accurately and efficiently learn to sample from a target in a distributed setting in many benchmark tasks, including phylogenetic inference and Bayesian structure learning,  //.
-      - we verify that minimizing the *CB loss*, derived from the CBC, often leads  to faster convergence than alternative learning objectives. 
+      - we revisit the relationship between GFlowNets and VI in continuous spaces,   
+      - we empirically demonstrate that the well-known difficult of training GFlowNets by minimizing traditional divergence measures arises from the large gradient variance of the corresponding stochastic learning objectives,   
+      - we develop statistically efficient variance-reduced gradient estimators for both the $alpha$ and KL family of divergences,  //.
+      - we verify that the resulting learning algorithms significantly improve upon conventional log-squared losses in terms of convergence speed,  // .
+      - we re-open the once-dismissed research line focused on VI-inspired algorithmic improvements of GFlowNets.  
       ]
     ]
   )
@@ -49,7 +50,7 @@
 [
   = Background: GFlowNets 
 
-  *GFlowNets* are amortized algorithms for sampling from distributions over discrete and compositional objects (such as graphs). 
+  *GFlowNets* are amortized algorithms for sampling from distributions over compositional objects, i.e., over objects that can be sequentially constructed from an initial state through the application of simple actions (e.g., graphs via edge-addition). 
 
   #figure(
     image("figures/tb.svg", 
@@ -58,7 +59,25 @@
   )
 
 
-  Briefly, a *flow network* is defined over an extension $cal(S)$ of $cal(G)$, which then represents the sink nodes. To navigate within this network and sample from $cal(G)$ proportionally to a *reward function* $R colon cal(G) arrow.r RR_(+)$, a forward (resp. backward) policy #pf (#pb) is used. 
+  #block(
+    fill: none,
+    stroke: 2pt + darkblue,   
+    inset: 12pt, 
+    [
+      #text(fill: darkblue)[
+        In a nutshell, a GFlowNet is composed of two three ingredients. 
+
+        1. An extension $cal(S)$ of the target distribution support's $cal(X)$. 
+        
+        2. A _measurable pointed DAG_ $cal(G)$ on $cal(S)$ dictating how the _states_ in $cal(S)$ are connected to one another. We refer to $cal(G)$ as the _state graph_.  
+
+        3. A #text(fill: brickred)[forward] and #text(fill: forestgreen)[backward] policies defining the stochastic transitions within $cal(G)$. 
+      ]
+    ]
+  )
+
+  For finite state spaces, the state graph might be represented as the above DAG. 
+
 
   $ 
   #pf = product_((s, s') in tau) p_F(s' | s) #text[ and ] sum_(tau arrow.r.squiggly g) #pf = R(g). 
