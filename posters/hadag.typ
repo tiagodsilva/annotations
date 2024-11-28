@@ -162,7 +162,7 @@
 
   2. A *scheme for integrating the expert's knowledge* into AGFN's learned model. Given feedbacks $cal(F) = {V_i cal(R)_i W_i}_(i=1)^(n)$, 
   $
-    p(G | cal(F)) = underbrace(p(G), "AGFN") product_(1 <= i <= n) q(underbrace(V_i cal(R)_i^(G) W_i, "Relation in G") | underbrace(V_i cal(R)_i W_i, "Feedback")). 
+    p(G | cal(F)) prop underbrace(p(G), "AGFN") product_(1 <= i <= n) q(underbrace(V_i cal(R)_i^(G) W_i, "Relation in G") | underbrace(V_i cal(R)_i W_i, "Feedback")). 
   $
 
   #figure(
