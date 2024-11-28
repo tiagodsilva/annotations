@@ -64,8 +64,29 @@
     ] 
     // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
   )
-  
+
+
+  #block(
+    fill: none,
+    stroke: 2pt + darkblue,   
+    inset: 12pt, 
+    [
+      #text(fill: darkblue)[      
+        To accomplish this, we learn a forward #pf and backward #pb policies on a state graph (illustrated above) such that 
+        $
+          Z #pf = #pb R(x), 
+        $ 
+        in which $R$ is the unnormalized distribution of interest and $Z$ is its partition function. If this condition is satisfied for each $tau$, 
+        $
+          p_(top)(x) = sum_(tau arrow.r.squiggly x) p_F (tau) prop R(x),   
+        $
+        ensuring that the correctness of the generative process. 
+      ]
+    ]
+  )
+
   = Streaming Bayes GFlowNets  
+
 ])
 
 #colbreak() 
