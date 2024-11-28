@@ -12,6 +12,9 @@
   #let ceq = $ouset.overset(=, "C")$ 
   #let pfprime = text(fill: brickred)[$p_F (tau')$]
 
+  #let sgray(this) = {
+    text(fill: gray, size: 24pt)[#this]  
+  }
   // From https://github.com/Enter-tainer/delimitizer/blob/main/impl.typ
   #let base-size = 1.2em
   #let sizes = (base-size, base-size * 1.5, base-size * 2, base-size * 2.5)
@@ -38,6 +41,7 @@
     title_column_size: "32", 
     title_font_size: "88", 
     authors_font_size: "46", 
+    poster_margin: (top: 1in, left: .5in, right: .5in, bottom: 2in), 
     // Modifying the defaults
     keywords: ("GFlowNets", "Variational Bayesian inference"),
   )
@@ -93,15 +97,49 @@
 )
 
 #let body = lorem(90)
+#let phylo_table = table(
+    columns: (.5fr, .5fr, 2fr, 2fr, .6fr),
+    rows: (64pt, 64pt, 64pt, 64pt, 64pt), 
+    inset: 10pt, 
+    stroke: none, 
+    align: top, 
+    [], [], table.cell(colspan: 2)[Model], table.vline(), [], 
+    table.hline(), 
+    [], [], [GFlowNet], [SB-GFlowNet], [\% $arrow.t$], 
+    table.hline(),  
+    table.cell(
+          rowspan: 3, 
+          rotate(
+            -90deg, reflow: true, origin: center + bottom 
+          )[\# of leaves]
+        ), table.vline(),  
+    [7], table.vline(), [$2846.88$ #sgray[s]], [$bold(1279.68)$ #sgray[s]], [$0\%$] , 
+    table.hline(), 
+    [9], [$3779.11$ #sgray[s]], [$bold(1714.49)$ #sgray[s]], [$-2\%$], 
+    table.hline(), 
+    [11], [$4821.74$ #sgray[s]], [$bold(2303.99)$ #sgray[s]], [$0\%$], 
+    table.hline(), 
+)
+
+#let table_legend = block(
+    inset: 32pt,
+    radius: 24pt,
+)[
+  SB-GFlowNets *achieve faster training convergence* than conventional GFlowNets in a streaming context --- while *maintaining a comparable performance* in terms of the TV distance (right column).  
+  
+  (Results averaged across 3 runs.) 
+]
+
 #place(
   center + bottom,
   float: true,
   scope: "parent",   
   grid(
     columns: (1fr, 3fr, 1fr),
+    gutter: .3in, 
     body, 
     fig, 
-    body  
+    grid(rows: 2, gutter: .3in, phylo_table, table_legend)   
   )
 )
 
@@ -135,33 +173,6 @@
 #line(length: 100%)
 
 #align(
-  center, 
-  block(
-        fill: none,
-        stroke: 2pt + forestgreen,   
-        inset: 12pt, 
-        [
-            #text(fill: forestgreen)[
-              Online Bayesian phylogenetic inference. 
-          ]
-        ]
-      )
-) 
-
-#figure(
-
-    image("figures/phylogenetic_posterior_approx.svg", 
-          width: 100%),
-    caption: [
-      SB-GFlowNet's probability mass associated to the true phylogenetic tree increases as we observe more sequences. 
-    ] 
-    // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
-  )
-
-#v(35.75pt, weak: true)
-#line(length: 100%)
-
-#align(
   center,   
   block(
         fill: none,
@@ -182,6 +193,33 @@
           width: 100%),
     caption: [
       SB-GFlowNets accurately sample from an evolving belief distribution in a structure learning setting. 
+    ] 
+    // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
+  )
+
+#v(35.75pt, weak: true)
+#line(length: 100%)
+
+#align(
+  center, 
+  block(
+        fill: none,
+        stroke: 2pt + forestgreen,   
+        inset: 12pt, 
+        [
+            #text(fill: forestgreen)[
+              Online Bayesian phylogenetic inference. 
+          ]
+        ]
+      )
+) 
+
+#figure(
+
+    image("figures/phylogenetic_posterior_approx.svg", 
+          width: 100%),
+    caption: [
+      SB-GFlowNet's probability mass associated to the true phylogenetic tree increases as we observe more sequences. 
     ] 
     // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
   )
