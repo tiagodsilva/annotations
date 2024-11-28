@@ -34,7 +34,7 @@
     footer_email_ids: "{tiago.henrique, diego.mesquita}@fgv.br, daniel.souza.21@ucl.ac.uk",
     footer_color: "ebcfb2", 
     univ_logo_column_size: (8in, 8in),
-    univ_logo_column_gutter: (-4in, -.1in), 
+    univ_logo_column_gutter: (-2in, -.1in), 
     title_column_size: "32", 
     title_font_size: "88", 
     authors_font_size: "46", 
@@ -42,24 +42,7 @@
     keywords: ("GFlowNets", "Variational Bayesian inference"),
   )
 
-  #set text(size: 22pt) 
-
-  #block(
-    fill: rgb(0, 0, 155, 128),
-    inset: 32pt,
-    radius: 24pt,
-    [
-      #text(fill: white)[
-      *TL;DR*     
-      - we propose _Streaming Bayes GFlowNets_ (SB-GFlowNets) as // the first 
-        a general-purpose variational inference tool for streaming Bayesian inference in discrete spaces, 
-      - in simple terms, SB-GFlowNet employs a GFlowNet as a surrogate prior to update the current posterior based on newly observed data, eliminating the need to process the entire dataset repeatedly,   
-      - we introduce off-policy and on-policy algorithms for training SB-GFlowNets, 
-      - we demonstrate that SB-GFlowNets are susceptible to catastrophic error propagation and discuss potential workarounds, 
-      - we empirically verify that SB-GFlowNets can drastically reduce the training time of a GFlowNet in a streaming Bayes setting,    
-      ]
-    ]
-  )
+  #set text(size: 32pt) 
 
 #block(
   inset: 24pt, 
@@ -73,55 +56,132 @@
     image("figures/tb.svg", 
           width: 50%),
     caption: [
-      An illustration of the GFlowNet's state graph as a DAG on $cal(S)$. 
+      An illustration of the state graph as a DAG on $cal(S)$. 
     ] 
     // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
   )
-
-
-  #block(
-    fill: none,
-    stroke: 2pt + darkblue,   
-    inset: 12pt, 
-    [
-      #text(fill: darkblue)[
-        In a nutshell, a GFlowNet is composed of two three ingredients. 
-
-        1. An extension $cal(S)$ of the target distribution support's $cal(X)$. 
-        
-        2. A _measurable pointed DAG_ $cal(G)$ on $cal(S)$ dictating how the _states_ in $cal(S)$ are connected to one another. We refer to $cal(G)$ as the _state graph_.  
-
-        3. A #text(fill: brickred)[forward] and #text(fill: forestgreen)[backward] policies defining the stochastic transitions within $cal(G)$. 
-      ]
-    ]
-  )
-
-  Our objective is to learn a forward #pf and a backward #pb policies such that the marginal of #pf over $cal(X)$ matches a given unnormalized density $r colon cal(X) arrow.r RR_(+)$.   
-
-  $ 
-    #pf = product_((s, s') in tau) p_F (s' | s) #text[ and ] integral_(cal(T)) 1_(tau arrow.r.squiggly x) #pf mono(d)tau = r(x); // . 
-  $
-
-  $cal(T)$ denotes the space of trajectories in $cal(G)$ and $tau arrow.r.squiggly$, the event in which $tau$ finishes on $x in cal(X)$.  
-
+  
+  = Streaming Bayes GFlowNets  
 ])
 
 #colbreak() 
-
 
   #block(
     fill: rgb(0, 0, 155, 128),
     inset: 32pt,
     radius: 24pt,
-    [
-      #text(fill: white, size: 48pt)[
-      *TL;DR*     
-      - we propose _Streaming Bayes GFlowNets_ (SB-GFlowNets) as // the first 
-        a general-purpose variational inference tool for streaming Bayesian inference in discrete spaces, 
-      - in simple terms, SB-GFlowNet employs a GFlowNet as a surrogate prior to update the current posterior based on newly observed data, eliminating the need to process the entire dataset repeatedly,   
-      - we introduce off-policy and on-policy algorithms for training SB-GFlowNets, 
-      - we demonstrate that SB-GFlowNets are susceptible to catastrophic error propagation and discuss potential workarounds, 
-      - we empirically verify that SB-GFlowNets can drastically reduce the training time of a GFlowNet in a streaming Bayes setting,    
+    [ 
+      #align(
+        center, 
+        text(fill: white,  size: 64pt)[
+        We introduce #text(weight: "black")[Streaming Bayes GFlowNets] (SB-GFlowNets) as a general-purpose tool for streaming Bayesian inference over *discrete spaces*. Our model leverages a *GFlowNet* as a surrogate prior when updating the current posterior approximation based on new data, thereby *avoiding to repeatedly process old data* and *significantly accelerating* training convergence in a streaming setting.  
       ]
+      ) 
     ]
+  )
+
+
+#let fig = figure(
+  placement: bottom, 
+  scope: "parent", 
+  image("figures/streaming_diagrams.svg", 
+        width: 100%),
+  caption: [
+    Streaming amortized inference with SB-GFlowNets. 
+  ] 
+  // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
+)
+
+#let body = lorem(90)
+#place(
+  center + bottom,
+  float: true,
+  scope: "parent",   
+  grid(
+    columns: (1fr, 3fr, 1fr),
+    body, 
+    fig, 
+    body  
+  )
+)
+
+#colbreak() 
+
+
+#align(
+  center, 
+  block(
+      fill: none,
+      stroke: 2pt + darkblue,   
+      inset: 12pt, 
+      [
+          #text(fill: darkblue)[
+            Linear preference learning with integer-valued features. 
+        ]
+      ]
+    )
+) 
+
+#figure(
+    image("figures/streaming_distributional_approx.svg", 
+          width: 100%),
+    caption: [
+      SB-GFlowNets accurately sample from the posterior distribution over the utility in integer-valued preference learning.  
+    ] 
+    // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
+  )
+
+#v(35.75pt, weak: true)
+#line(length: 100%)
+
+#align(
+  center, 
+  block(
+        fill: none,
+        stroke: 2pt + forestgreen,   
+        inset: 12pt, 
+        [
+            #text(fill: forestgreen)[
+              Online Bayesian phylogenetic inference. 
+          ]
+        ]
+      )
+) 
+
+#figure(
+
+    image("figures/phylogenetic_posterior_approx.svg", 
+          width: 100%),
+    caption: [
+      SB-GFlowNet's probability mass associated to the true phylogenetic tree increases as we observe more sequences. 
+    ] 
+    // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
+  )
+
+#v(35.75pt, weak: true)
+#line(length: 100%)
+
+#align(
+  center,   
+  block(
+        fill: none,
+        stroke: 2pt + brickred,   
+        inset: 12pt, 
+        [
+            #text(fill: brickred)[
+              Streaming Bayesian structure learning with DAG-GFlowNets. 
+          ]
+        ]
+      )
+) 
+
+
+#figure(
+
+    image("figures/streaming_eval_dags.svg", 
+          width: 100%),
+    caption: [
+      SB-GFlowNets accurately sample from an evolving belief distribution in a structure learning setting. 
+    ] 
+    // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
   )
