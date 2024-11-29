@@ -7,6 +7,13 @@
   #let argmin = [argmin] 
   #let pf = text(fill: brickred)[$p_F (tau)$]
   #let pb = text(fill: forestgreen)[$p_B (tau|x)$]
+
+  #let pfT = text(fill: brickred)[$p_F^((T)) (tau)$]
+  #let pbT = text(fill: forestgreen)[$p_B^((T)) (tau|x)$]
+  
+  #let pfTm1 = text(fill: brickred)[$p_F^((T - 1)) (tau)$]
+  #let pbTm1 = text(fill: forestgreen)[$p_B^((T - 1)) (tau|x)$]
+  
   #let pbtau = text(fill: forestgreen)[$p_B (tau)$]
   #let KL = text[$mono(K L)$] 
   #let ceq = $ouset.overset(=, "C")$ 
@@ -117,7 +124,33 @@
   // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
 )
 
-#let body = lorem(90)
+#let body = block(
+  inset: .9pt 
+)[
+  Let ${R_t}_(t >= 1)$ be a sequence of unnormalized distributions. For each $T$, we train a GFlowNet $G_T$ sampling in proportion to  
+  $
+    product_(1 <= t <= T) R_t (x). 
+  $ 
+  These GFlowNets approximately satisfy 
+  $
+    Z_T #pfT = #pbT product_(1 <= t <= T) R_t (x), 
+  $ 
+  By noticing that 
+  $
+    Z_T #pfT = #pbT R_T (x) 
+    underbrace(
+      product_(1 <= t <= T - 1) R_t (x), 
+      approx #pfTm1 slash #pbTm1  
+    ) 
+  $ 
+  we train the $T$th GFlowNet by minimizing 
+  #math.equation(numbering: none, block: true)[
+    $
+      EE_tau [ (log frac(Z_T #pfT, #pbT R_T (x)) -  log frac(#pfTm1, #pbTm1))^2 ]. // , 
+    $ 
+  ]
+]
+
 #let phylo_table = table(
     columns: (.5fr, .5fr, 2fr, 2fr, .6fr),
     rows: (64pt, 64pt, 64pt, 64pt, 64pt), 
@@ -158,7 +191,7 @@
   grid(
     columns: (1fr, 3fr, 1fr),
     gutter: .3in, 
-    body, 
+    align(left, body), 
     fig, 
     grid(rows: 2, gutter: .3in, phylo_table, table_legend)   
   )
@@ -166,6 +199,35 @@
 
 #colbreak() 
 
+
+#align(
+  left,   
+  block(
+        fill: none,
+        stroke: 2pt + brickred,   
+        inset: 12pt, 
+        radius: 24pt,
+        [
+            #text(fill: brickred)[
+              - *Under which circumstances are SB-GFlowNets useful?* 
+              
+              1. when $product_(1 <= t <= T) R_t (x)$ is 
+                expensive to compute (e.g., in large-scale Bayesian inference
+                --- where each $R_t (x)$ is a likelihood function), // . 
+              2. and each GFlowNet is relatively cheap to evaluate 
+                (e.g., $#pf$ is an MLP or a small GNN --- which covers most applications).  
+              
+              - *What factors should we consider when training SB-GFlowNets?* 
+
+              SB-GFlowNets are amenable to catastrophic error propagation; 
+              the accumulated errors should be carefully tracked. 
+          ]
+        ]
+      )
+) 
+
+#v(35.75pt, weak: true)
+#line(length: 100%)
 
 #align(
   center, 
@@ -183,40 +245,23 @@
 
 #figure(
     image("figures/streaming_distributional_approx.svg", 
-          width: 100%),
+          width: 80%),
     caption: [
       SB-GFlowNets accurately sample from the posterior distribution over the utility in integer-valued preference learning.  
     ] 
     // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
   )
 
-#v(35.75pt, weak: true)
-#line(length: 100%)
 
-#align(
-  center,   
-  block(
-        fill: none,
-        stroke: 2pt + brickred,   
-        inset: 12pt, 
-        [
-            #text(fill: brickred)[
-              Streaming Bayesian structure learning with DAG-GFlowNets. 
-          ]
-        ]
-      )
-) 
+// #figure(
 
-
-#figure(
-
-    image("figures/streaming_eval_dags.svg", 
-          width: 100%),
-    caption: [
-      SB-GFlowNets accurately sample from an evolving belief distribution in a structure learning setting. 
-    ] 
-    // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
-  )
+//     image("figures/streaming_eval_dags.svg", 
+//           width: 100%),
+//     caption: [
+//       SB-GFlowNets accurately sample from an evolving belief distribution in a structure learning setting. 
+//     ] 
+//     // [A GFlowNet learns a #text(fill: brickred)[forward policy] on a state graph.]
+//   )
 
 #v(35.75pt, weak: true)
 #line(length: 100%)
