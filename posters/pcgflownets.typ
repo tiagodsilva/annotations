@@ -202,7 +202,7 @@
 
   = Subgraph Asynchronous Learning (SAL) 
 
-  @oracles demonstrates that the larger trajectory length $t_m$ play a key role in constraining the generalization potential of GFlowNets. To mitigate this effect, we propose a distributed divide-and-conquer learning algorithm that breaks up the state graph into smaller subgraphs and learns a GFlowNet for each subgraph. The resulting GFlowNets are aggregated in a final, efficient step. We refer to this approach as *Subgraph Asynchronous Learning* (SAL). 
+  @oracles demonstrates that the larger trajectory length $t_m$ plays a key role in constraining the generalization potential of GFlowNets. To mitigate this effect, we propose a distributed divide-and-conquer learning algorithm that breaks up the state graph into smaller subgraphs and learns a GFlowNet for each subgraph. The resulting GFlowNets are aggregated in a final, efficient step. We refer to this approach as *Subgraph Asynchronous Learning* (SAL). 
 
   #grid(
     columns: (1fr, 1fr),
@@ -236,7 +236,7 @@
     ]
   )
 
-  Our experimental results in @salreinforcements and @salsequences show that SAL often accelerate training convergence and increase the mode-finding capability of the GFlowNet. These observations are in alignment with our theoretical analysis in @oracles (@salreinforcements) and corroborate the intuition that a divide-and-conquer approach enhances the exploration of the learning agent (@salsequences).  
+  Our experimental results in @salreinforcements and @salsequences show that SAL often accelerates training convergence and increases the mode-finding capability of the GFlowNet. These observations are in alignment with our theoretical analysis in @oracles (@salreinforcements) and corroborate the intuition that a divide-and-conquer approach enhances the exploration of the learning agent (@salsequences).  
 
   #figure(
     image("figures/asynchronous_learning_grids_large.svg", width: 100%),

@@ -38,7 +38,7 @@
       - we demonstrate that the impact of an imbalanced transition on the GFlowNet's correctness is unevenly distributed across the network, 
       - we delineate the expressiveness of a GFlowNet parameterized by a 1-WL GNN in terms of the distributions it can learn, 
       - we introduce FCS as a tractable and accurate goodness-of-fit measure for GFlowNets 
-      - and we show that conventionally used diagonstic procedures often misrepresent the distributional correctness of a GFlowNet.
+      - and we show that conventionally used diagnostic procedures often misrepresent the distributional correctness of a GFlowNet.
       ]
     ]
   )
@@ -100,7 +100,7 @@
   3. How can we tractably measure the proximity of a GFlowNet to its target distribution?
 
 
-  Jointly, we seek for a deeper understanding on the consequences (1), causes (2), and assessment (3) of GFlowNets.
+  Jointly, we seek a deeper understanding on the consequences (1), causes (2), and assessment (3) of GFlowNets.
   
   = What are the *consequences* of an imbalanced transition?  
 
@@ -235,7 +235,7 @@
   $
 
   $
-    "NumModes"(R, cal(X)_n, xi) = | { x in cal(X)_n colon R(x) >= xi)}| 
+    "NumModes"(R, cal(X)_n, xi) = | { x in cal(X)_n colon R(x) >= xi}| 
   $
 
   in which $cal(X)_n = {x_1, ..., x_n} subset cal(G)$ is a set of samples that a GFlowNet found during training and $xi > 0$ is an arbitrary threshold. We show that neither of these quantities accurately reflect the distributional accuracy of a GFlowNet.  
@@ -291,4 +291,4 @@
 
   = Take-home message
 
-  Our work provides a principled approach for analyzing GFlowNets through the perspective of flow imbalance (I), characterizing its potential failures modes under the light of the limited expressivity of GNNs (II), and diagnosing its learned distribution with a sound and computationally tractable metric that may help standardize evaluation and accelerate progress in the field (III).    
+  Our work provides a principled approach for analyzing GFlowNets through the perspective of flow imbalance (I), characterizing its potential failure modes under the light of the limited expressivity of GNNs (II), and diagnosing its learned distribution with a sound and computationally tractable metric that may help standardize evaluation and accelerate progress in the field (III).    
