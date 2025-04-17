@@ -13,15 +13,15 @@
     authors: "Tiago da Silva, Eliezer da Silva, Antonio Góis," +  linebreak(justify: false) +  "Samuel Kaski, Dominik Heider, Diego Mesquita, Adèle Ribeiro",
     footer_email_ids: [], 
     departments: none,
-    univ_logo: ("../logos/aalto.png", "../logos/marburg.png", "../logos/fgv.png", "../logos/mila.png"),
+    univ_logo: ("../logos/aalto.png", "../logos/marburg.png", "../logos/latinx.png", "../logos/fgv.png", "../logos/mila.png", "../logos/neurips_logo.png"),
     footer_text: "LatinX @ NeurIPS 2024",
     footer_url: "https://github.com/ML-FGV/agfn",
     footer_color: "ebcfb2", 
-    univ_logo_column_size: (5in, 5in), 
+    univ_logo_column_size: (5in, 5in, 2.5in), 
     univ_logo_column_gutter: (-3.5in, -.25in, -.25in, -.05in, -.05in), 
     univ_logo_grid_row_size: (1.8in, 2in),  
-    univ_logo_grid_col_size: (3.6in, 3.6in), 
-    univ_logo_scale: (50%, 50%, 110%, 110%), 
+    univ_logo_grid_col_size: (3.6in, 3.6in, 2in), 
+    univ_logo_scale: (50%, 50%, 80%, 110%, 110%, 80%), 
     title_column_size: "16", 
     title_font_size: "64", 
     authors_font_size: "32", 
@@ -60,10 +60,11 @@
   #align(
     center, 
     grid(
-      rows: (1.8in, .15in), columns: 2,  
-      align(left, image("figures/iv.svg")),   
+      rows: (1.8in, .15in), columns: 3,  
+      align(horizon, image("figures/chain4.svg")), 
       align(right, image("figures/collfork.svg")), 
-      grid.cell(colspan: 2, align(center, text(size: 18pt)[Examples of ancestral graphs.]))  
+      align(left, image("figures/iv.svg")),   
+      grid.cell(colspan: 3, align(center, text(size: 18pt)[Examples of ancestral graphs.]))  
       )
   )
 
@@ -81,6 +82,7 @@
           $
             pi(G | bold(X)) prop exp(s(bold(X), G) ).  
           $
+	  Alas, exact Bayesian inference on $pi$ is not possible. Instead, we use a GFlowNet to tractably approximate $pi$.
         ]
       ]
     )
@@ -92,7 +94,7 @@
   compositional space $cal(G)$. 
 
   #figure(
-    image("figures/tb.svg", width: 45%)
+    image("figures/tb.svg", width: 39%)
   ) <gfn> 
 
   We construct a *state graph* on the extended space ${s_o} union cal(S) union cal(G)$ 
@@ -157,11 +159,11 @@
   $
     q(V hat(cal(R)) W | cal(R)) = pi dot.c 1_(V hat(cal(R)) W = V cal(R) W) + ( (1 - pi) / 3 ) dot.c 1_(V hat(cal(R)) W != V cal(R) W)
   $
-  in which $cal(R) in {arrow.r, arrow.l, arrow.l.r, emptyset}$ ($hat(cal(R))$) is the expert-provided (estimated) relationship between $V$ and $W$; $pi$ is an hyperparameter. 
+  in which $cal(R) in {arrow.r, arrow.l, arrow.l.r, emptyset}$ ($hat(cal(R))$) is the expert-provided (estimated) relationship between $V$ and $W$; $pi$ is an hyperparameter.
 
   2. A *scheme for integrating the expert's knowledge* into AGFN's learned model. Given feedbacks $cal(F) = {V_i cal(R)_i W_i}_(i=1)^(n)$, 
   $
-    p(G | cal(F)) = underbrace(p(G), "AGFN") product_(1 <= i <= n) q(underbrace(V_i cal(R)_i^(G) W_i, "Relation in G") | underbrace(V_i cal(R)_i W_i, "Feedback")). 
+    p(G | cal(F)) prop underbrace(p(G), "AGFN") product_(1 <= i <= n) q(underbrace(V_i cal(R)_i^(G) W_i, "Relation in G") | underbrace(V_i cal(R)_i W_i, "Feedback")). 
   $
 
   #figure(
@@ -175,7 +177,7 @@
     inset: 12pt, 
     [
       #text(fill: darkblue)[
-        We probe the expert on the relation $cal(R)$ minimizing the cross-entropy between distributions $p(dot.c | cal(F) union  {cal(R)})$ and $p(dot.c | cal(G))$.    
+        We probe the expert on the relation $cal(R)$ minimizing the cross-entropy between distributions $p(dot.c | cal(F) union  {cal(R)})$ and $p(dot.c | cal(F))$.    
       ]
     ]
   )

@@ -1,0 +1,1 @@
+I am using typst==0.12.0 to compile the files with `.typ` extension. Execute `typst watch $filename`, e.g., `typst watch epgflownets.typ`, in the folder `posters` to generate and continually modify a PDF.  
