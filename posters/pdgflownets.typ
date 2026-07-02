@@ -19,7 +19,7 @@
   univ_logo: ("../logos/mbzuai.svg", "../logos/uoe.png", "../logos/cifar.png"),
   footer_text: "International Conference on Machine Learning 2026",
   footer_url: "https://github.com/ML-FGV/nais",
-  footer_email_ids: text[{tiago.dasilva, salem.lahlou}\@mbzuai.ac.ae, esmeralda.whitammer\@ed.ac.uk — (+) MBZUAI · ($star$) University of Edinburgh · ($star$) CIFAR],
+  footer_email_ids: text[{tiago.dasilva, salem.lahlou}\@mbzuai.ac.ae, esmeralda.whitammer\@ed.ac.uk -- (+) MBZUAI, ($star$) University of Edinburgh, ($star$) CIFAR],
   footer_color: "ebcfb2",
   univ_logo_column_size: (6in, 7in, 3.5in),
   univ_logo_column_gutter: (.8in, .4in, .4in),
@@ -105,7 +105,7 @@
     with $b$ fixed and $a_o, w_a, v_a$ learned.
 
     #figure(
-      image("figures/liftedgraphs_p6-1.png", width: 60%),
+      image("figures/liftedgraphs_p6-1.png", width: 40%),
       caption: [The #smallcaps[Lines] environment: from position $p_i$ the policy either *jumps forward* (up to $M$ steps) or *stops* at the terminal $q_i$.],
     )
 
@@ -136,8 +136,7 @@ For a *sparse* target on #smallcaps[Lines] ($R(q_2) = R(q_20) = 1000 dot R(q_1)$
     columns: (1fr, 1fr),
     column-gutter: 12pt,
     align: bottom,
-    image("figures/linesaliasinggggmaxkl32-1.png", width: 96%),
-    image("figures/linesaliasingggg-1.png", width: 100%),
+    image("figures/linesaliasinggggmaxkl32-1.png", width: 96%), image("figures/linesaliasingggg-1.png", width: 100%),
   ),
   caption: [Separation of the learned policies at $p_2$ vs. $p_3$ (left) and convergence / goodness-of-fit (right): #mkv needs $tilde.op 100 times$ more steps to tell $p_2$ from $p_3$---slow and unstable.],
 )
@@ -152,7 +151,7 @@ On graph-building tasks a state is a graph $G$ and a move adds one edge, scored 
 )
 
 #figure(
-  image("figures/sg_tv_vs_alpha-1.png", width: 38%),
+  image("figures/sg_tv_vs_alpha-1.png", width: 28%),
   caption: [Target $R(q_1) = alpha$, $R(q_2) = 1 - alpha$: #mkv is stuck at uniform (error $|alpha - 1/2|$); #pd $approx 0$.],
 )
 
@@ -206,15 +205,15 @@ with slow weights $W, b$ (SGD) and fast memory $W_(t-1)$ at self-set rate $sigma
 
 = Empirical Results
 
-We evaluate on grid exploration, the *lazy random walk*, set generation, and sequence design; across all tasks #pd yields a *closer fit* than its Markovian counterpart.
+We evaluate on grid exploration, the *lazy random walk*, set generation, and sequence design; across all tasks #pd yields a *more adequate fit* than its Markovian counterpart.
 
 #figure(
-  image("figures/hypergridss-1.png", width: 48%),
+  image("figures/hypergridss-1.png", width: 69%),
   caption: [*Grid World.* #pd recovers the multi-modal target; #mkv collapses onto a few modes.],
 )
 
 #figure(
-  image("figures/rings-1.png", width: 50%),
+  image("figures/rings-1.png", width: 90%),
   caption: [*Lazy random walk.* Learned densities: #mkv recovers only the inner ring, while #pd matches both rings of the target.],
 )
 
@@ -224,18 +223,27 @@ On the *lazy random walk* (appendix), the *recurrent memory* closes the gap: the
   columns: (1fr, 1fr),
   column-gutter: 14pt,
   figure(
-    image("figures/lazy_random_walk_gated_rnns.svg", width: 78%),
+    image("figures/lazy_random_walk_gated_rnns.svg", width: 99%),
     caption: [*R-SRWM* beats PD-GRU / PD-LSTM and #mkv.],
   ),
   figure(
-    image("figures/lazy_random_walk_ablations.svg", width: 78%),
+    image("figures/lazy_random_walk_ablations.svg", width: 99%),
     caption: [*Ablations:* rotation and recurrence both matter.],
   ),
 )
 
 = Take-aways
 
-- *Markovian samplers alias states*---provably and empirically *less expressive*.
-- Root cause: the environment becomes *(nearly) partially observable*.
-- We fix this by attaching a *learned recurrent memory* to the state, keeping the joint process Markovian so *standard training carries over unchanged*.
-- Result: *faster, stabler convergence* and a *better fit* to the target.
+#block(
+  fill: rgb(0, 0, 155, 128),
+  inset: 32pt,
+  radius: 24pt,
+  [
+    #text(fill: white, size: 28pt)[
+      - *Markovian samplers alias states*---provably and empirically *less expressive*.
+      - Root cause: the environment becomes *(nearly) partially observable*.
+      - We fix this by attaching a *learned recurrent memory* to the state, keeping the joint process Markovian so *standard training carries over unchanged*.
+      - Result: *faster, stabler convergence* and a *better fit* to the target.
+    ]
+  ],
+)
