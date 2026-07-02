@@ -133,7 +133,7 @@ For a *sparse* target on #smallcaps[Lines] ($R(q_2) = R(q_20) = 1000 dot R(q_1)$
 
 #figure(
   grid(
-    columns: (1fr, 1fr),
+    columns: (.7fr, 1fr),
     column-gutter: 12pt,
     align: bottom,
     image("figures/linesaliasinggggmaxkl32-1.png", width: 96%), image("figures/linesaliasingggg-1.png", width: 100%),
