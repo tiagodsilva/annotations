@@ -39,7 +39,7 @@
   keywords: ("Discrete sampling", "GFlowNets"),
 )
 
-#set text(size: 27pt)
+#set text(size: 28pt)
 
 // ======================= COLUMN 1 =======================
 
@@ -50,7 +50,7 @@
   text(fill: white)[
     *TL;DR*
     - discrete amortized samplers (e.g., GFlowNets) suffer from *underdetermination*, *limited expressiveness*, and *inefficient exploration*,
-    - *Mixture Model Augmentation (MMA)* injects *continuous random features* #gam into the policy, giving a *mixture of Markov processes* that *provably boosts expressivity*,
+    - *Mixture Model Augmentation (MMA)* injects *continuous random features* into the policy, giving a *mixture of Markov processes* that *provably boosts expressivity*,
     - across three benchmarks, MMA *accelerates convergence* and *improves the fit*.
   ],
 )
@@ -78,7 +78,8 @@ $
 
 = Mixture Model Augmentation
 
-Attach a *continuous random feature* #gam --- *constant along each trajectory* --- to every state, mirroring the momentum of Hamiltonian Monte Carlo.
+Attach a *continuous random feature* $#gam$---*constant along each trajectory*---to every state.
+This serves as an auxiliary variable, mirroring the momentum variable in HMC-like samplers.
 
 #cbox[
   *Augmented state graph.* Lift $cal(G)$ to $overline(cal(G)) = (cal(S) times Gamma, cal(X) times Gamma)$ with $(s, gamma) arrow.r (s', gamma')$ iff $s arrow.r s'$ and $gamma = gamma'$.
@@ -128,15 +129,15 @@ MMA *speeds up convergence* and *improves the fit* across Hypergrid, Lazy Random
 )
 
 #figure(
-  image("figures/discrete_diff.svg", width: 58%),
+  image("figures/discrete_diff.svg", width: 80%),
   caption: [*Lazy Random Walk*: MMA recovers the striped target the un-augmented sampler washes out.],
 )
 
 #figure(
   stack(
     spacing: 8pt,
-    image("figures/full_sets_training_curves_tv_item.svg", width: 88%),
-    image("figures/full_sets_training_curves_tv_size.svg", width: 88%),
+    image("figures/full_sets_training_curves_tv_item.svg", width: 100%),
+    image("figures/full_sets_training_curves_tv_size.svg", width: 100%),
   ),
   caption: [*Set Generation*: TV distance on item (top) and set-size (bottom) marginals vs. training step, $K in {12, 18, 24}$. MMA converges faster on both.],
 )
