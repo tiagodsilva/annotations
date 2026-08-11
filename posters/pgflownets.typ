@@ -242,7 +242,7 @@ Our model enables both fast, correlated and expensive, independent sampling from
     [],
     align(right, image("figures/legend_1x2_pgflownets.svg", width: 40%))
   ),
-  caption: [TV for set generation benchmark ($d$ = set size).],
+  caption: [Learning curve set generation ($d$ = set size).],
 )
 
 // #lorem(150)
