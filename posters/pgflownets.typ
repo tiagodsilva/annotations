@@ -195,7 +195,7 @@ The Markov chains $(s_(b, t))_(t >= 1)$ are constructed by *backward-forward ker
   ),
   text[
     The main process lives on $cal(X)$: $(x_(b, t))_(t >= 1)$.
-    We sample $k ~ #text[Poisson] (log L)$, and let
+    We sample $k ~ #text[Poisson] (log L)$, and
     #math.equation(block: true, numbering: none)[
       $s_(b, t) ~ #text(fill: brickred)[$p_B^((k))$] (x_(b, t), dot.c) \
       s_(b, t + 1) ~ #text(fill: forestgreen)[$p_F$] (s_(b, t), dot.c).$
